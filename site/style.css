@@ -1,0 +1,107 @@
+:root {
+  --bg: #14161c;
+  --panel: #1c2029;
+  --line: #2e3440;
+  --fg: #e6e9ef;
+  --dim: #949cad;
+  --accent: #f2a33c;
+  --good: #6fcf70;
+  --bad: #e06c6c;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+#map {
+  position: absolute;
+  inset: 0 400px 0 0;
+  background: #0d0f13;
+}
+
+#panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 400px;
+  padding: 20px 22px 28px;
+  overflow-y: auto;
+  background: var(--panel);
+  border-left: 1px solid var(--line);
+}
+
+h1 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: .2px; }
+.sub { margin: 4px 0 18px; color: var(--dim); font-size: 12px; }
+
+/* legend ------------------------------------------------------------- */
+.legend .row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.legend .row span { width: 78px; font-size: 12px; color: var(--dim); }
+.ramp { flex: 1; height: 12px; border-radius: 2px; }
+.ramp.bld { background: linear-gradient(90deg,#4a2b2b,#8f4436 20%,#cc6b3a 40%,#eda352 60%,#f7d773 80%,#fff6cf); }
+.ramp.veg { background: linear-gradient(90deg,#10300f,#2f6b26 30%,#7fbf4a 60%,#d3ea7a 85%,#f6ffd9); }
+.ticks {
+  display: flex; justify-content: space-between;
+  margin-left: 88px; font-size: 10px; color: var(--dim);
+}
+
+/* controls ----------------------------------------------------------- */
+.controls {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px;
+  margin: 20px 0 14px; padding: 14px 0;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.controls label {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--dim);
+}
+.controls input {
+  width: 58px; margin-left: auto; padding: 3px 6px;
+  background: #12151b; color: var(--fg);
+  border: 1px solid var(--line); border-radius: 4px;
+  font: inherit; font-size: 12px; text-align: right;
+}
+.controls input:focus { outline: none; border-color: var(--accent); }
+
+#status { color: var(--dim); font-size: 12px; }
+
+/* result ------------------------------------------------------------- */
+.verdict { display: flex; align-items: baseline; gap: 10px; margin: 4px 0 12px; }
+#horizon { font-size: 26px; font-weight: 600; }
+#margin { font-style: normal; font-size: 13px; }
+#margin.ok { color: var(--good); }
+#margin.no { color: var(--bad); }
+
+#facts { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+#facts td { padding: 3px 0; font-size: 12px; border-bottom: 1px solid #232833; }
+#facts td:first-child { color: var(--dim); }
+#facts td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+
+canvas { width: 100%; height: auto; display: block; background: #12151b; border-radius: 4px; }
+.caption { margin: 6px 0 18px; font-size: 11px; color: var(--dim); }
+
+.credit { margin-top: 22px; font-size: 11px; color: #6d7484; }
+
+/* leaflet tweaks ------------------------------------------------------ */
+.leaflet-container { background: #0d0f13; }
+.leaflet-control-layers, .leaflet-bar a {
+  background: var(--panel); color: var(--fg); border-color: var(--line);
+}
+.leaflet-control-layers-expanded { color: var(--fg); font-size: 12px; }
+.leaflet-bar a { border-bottom-color: var(--line); }
+.leaflet-bar a:hover { background: #262b36; color: var(--fg); }
+.leaflet-control-attribution {
+  background: rgba(20,22,28,.8) !important; color: var(--dim) !important;
+}
+.leaflet-control-attribution a { color: #9fb4d8 !important; }
+
+@media (max-width: 900px) {
+  #map { inset: 0 0 46% 0; }
+  #panel { top: 54%; width: 100%; border-left: none; border-top: 1px solid var(--line); }
+}

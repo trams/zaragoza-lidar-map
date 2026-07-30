@@ -1,0 +1,6 @@
+# Source rasters: ~9 MB, re-downloadable in minutes with `pnoa_render.py fetch`.
+# The rendered site under site/ IS committed, because GitHub Pages serves it.
+zaragoza_pnoa/
+
+__pycache__/
+*.pyc
