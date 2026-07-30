@@ -44,11 +44,29 @@ scne.es` in their `GetCapabilities`:
 | building height AGL | `wcs-mds.idee.es/mds` | `mdsn_e025` | 2.5 m |
 | vegetation height AGL | `wcs-mds.idee.es/mds` | `mdsn_v025` | 2.5 m |
 
-Caveats worth knowing before you trust a number: heights are quantised to whole
-metres, and the MDS service states its products are generated from the **first**
-PNOA-LiDAR coverage (roughly 2009–2015), so buildings put up since are missing
-and every tree has grown. Treat a margin under about 1° as inconclusive, and go
-stand there.
+### Vintage
+
+Both the WCS capabilities and the [INSPIRE catalogue
+record](https://www.idee.es/csw-inspire-idee/srv/spa/csw?Service=CSW&Request=GetRecordById&Version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmd&elementSetName=full&id=spaignwcs_MDS)
+state the surface models are `generados a partir del MDT-LIDAR 1ª cobertura`.
+Cross-referencing the first-coverage flight-line shapefile for Aragón Norte
+against this window, **every tile here was flown on one of two days: 21 January
+2011 south of ~4614000 N, 23 January 2011 north of it**, with a narrow overlap
+band between. (Zaragoza's second-coverage flight was 15 October 2016, but that
+is not what these services serve.)
+
+That date is the single biggest caveat in this tool, in three compounding ways,
+all pointing the same direction:
+
+- **Leaf-off.** A January flight sees deciduous street trees bare. Canopy
+  heights from a leaf-off pass at 0.5 pts/m² tend to *under*-read the crown,
+  and the model here treats vegetation as opaque regardless.
+- **15 years of growth** between the flight and the August 2026 eclipse.
+- **New construction** since 2011 is simply absent.
+
+So the horizons this tool reports are **optimistic** — reality will be somewhat
+worse, not better. Heights are also quantised to whole metres. Treat a margin
+under about 1° as inconclusive, and go stand there.
 
 ## Licence and attribution
 
