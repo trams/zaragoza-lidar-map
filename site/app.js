@@ -145,10 +145,17 @@ function horizonAt(x, y, az, eyeZ, range, useVeg) {
 const CENTER = [41.6520, -0.8809];
 const map = L.map('map', { center: CENTER, zoom: 14, zoomControl: true });
 
+/* IGN asks for the derived-work formula, since these tiles are mosaicked,
+ * reprojected and recoloured rather than served as supplied. */
+const IGN_CREDIT =
+  'Obra derivada de MDT05 y MDS-LiDAR (PNOA), ' +
+  '<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> ' +
+  '<a href="https://www.scne.es/">scne.es</a>';
+
 function layer(name, opts) {
   return L.tileLayer(`tiles/${name}/{z}/{x}/{y}.png`, Object.assign({
     minZoom: 11, maxZoom: 19, maxNativeZoom: 16, minNativeZoom: 12,
-    tileSize: 256, attribution: 'PNOA LiDAR &copy; Instituto Geogr&aacute;fico Nacional',
+    tileSize: 256, attribution: IGN_CREDIT,
   }, opts || {}));
 }
 
@@ -156,8 +163,13 @@ const heightL = layer('height');
 const terrainL = layer('terrain');
 const buildingsL = layer('buildings');
 const vegL = layer('vegetation');
+/* The OSM guidelines want both the credit and a statement that the data is
+ * ODbL; the credit must stay visible rather than hide behind a toggle. */
 const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19, attribution: '&copy; OpenStreetMap contributors',
+  maxZoom: 19,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' +
+    'OpenStreetMap</a> contributors, data under ' +
+    '<a href="https://opendatacommons.org/licenses/odbl/">ODbL</a>',
 });
 
 heightL.addTo(map);

@@ -87,6 +87,7 @@ canvas { width: 100%; height: auto; display: block; background: #12151b; border-
 .caption { margin: 6px 0 18px; font-size: 11px; color: var(--dim); }
 
 .credit { margin-top: 22px; font-size: 11px; color: #6d7484; }
+.credit a { color: #8a93a6; }
 
 /* leaflet tweaks ------------------------------------------------------ */
 .leaflet-container { background: #0d0f13; }

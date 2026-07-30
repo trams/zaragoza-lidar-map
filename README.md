@@ -35,8 +35,8 @@ See [architecture.md](architecture.md) for how the pieces fit together and why.
 
 ## Data
 
-Open WCS, no registration, CC BY 4.0 — attribution to Instituto Geográfico
-Nacional required:
+Open WCS, no registration. Both services declare `AccessConstraints: CC BY 4.0
+scne.es` in their `GetCapabilities`:
 
 | layer | endpoint | coverage | res |
 |---|---|---|---|
@@ -45,10 +45,31 @@ Nacional required:
 | vegetation height AGL | `wcs-mds.idee.es/mds` | `mdsn_v025` | 2.5 m |
 
 Caveats worth knowing before you trust a number: heights are quantised to whole
-metres; the normalised models derive from the 2015–2021 LiDAR coverage, so
-recent buildings may be missing and trees have grown since. Treat a margin under
-about 1° as inconclusive, and go stand there.
+metres, and the MDS service states its products are generated from the **first**
+PNOA-LiDAR coverage (roughly 2009–2015), so buildings put up since are missing
+and every tree has grown. Treat a margin under about 1° as inconclusive, and go
+stand there.
 
-## Licence
+## Licence and attribution
 
-Code MIT. Elevation data © Instituto Geográfico Nacional (PNOA LiDAR), CC BY 4.0.
+Three separate licences apply to different parts of this repository.
+
+**Code** — `pnoa_render.py`, `site/app.js`, `site/style.css`, `site/index.html`
+— is MIT, see [LICENSE](LICENSE).
+
+**Elevation data** under `site/tiles/` and `site/data/` is derived from IGN
+PNOA-LiDAR products, CC BY 4.0. Because it is mosaicked, reprojected and
+recoloured rather than served as supplied, IGN's derived-work attribution
+formula applies, and it must stay legible near the data:
+
+> Obra derivada de MDT05 y MDS-LiDAR (PNOA), CC BY 4.0 scne.es
+
+**Leaflet 1.9.4** under `site/vendor/` is BSD-2-Clause, © Volodymyr Agafonkin
+and CloudMade — see [site/vendor/LICENSE-leaflet.txt](site/vendor/LICENSE-leaflet.txt).
+
+The optional OSM base layer displays tiles from `tile.openstreetmap.org`: data
+© OpenStreetMap contributors, available under the
+[ODbL](https://opendatacommons.org/licenses/odbl/). No OSM-derived data is
+redistributed here — the layer is off by default and fetches tiles only when
+selected, which keeps it inside the
+[OSMF tile usage policy](https://operations.osmfoundation.org/policies/tiles/).
